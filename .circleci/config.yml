@@ -106,7 +106,7 @@ workflows:
   build_and_deploy:
     jobs:
       - build:
-        app-dir: "~/cinema-app/cinema"
+          app-dir: "~/cinema-app/cinema"
       - deploy-to-aws-s3:
           requires:
             - build
