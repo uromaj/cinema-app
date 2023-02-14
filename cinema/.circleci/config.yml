@@ -10,7 +10,7 @@ jobs:
   build:
     docker:
       - image: circleci/node:latest
-    working_directory: ~/cinema
+    working_directory: ~/cinema-app
     steps:
       - checkout
       - run:
@@ -31,7 +31,7 @@ jobs:
   deploy-to-aws-s3:
     docker:
       - image: circleci/node:latest
-    working_directory: ~/cinema
+    working_directory: ~/cinema-app
     steps:
       - checkout
       - run:
@@ -68,7 +68,7 @@ jobs:
   deploy-to-aws-cloudfront:
     docker:
       - image: circleci/node:latest
-    working_directory: ~/cinema
+    working_directory: ~/cinema-app
     steps:
       - checkout
       - run:
