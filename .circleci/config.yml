@@ -105,7 +105,7 @@ deploy-to-aws-cloudfront:
 workflows:
   build_and_deploy:
     jobs:
-      - build
+      - build:
         app-dir: "~/cinema-app/cinema"
       - deploy-to-aws-s3:
           requires:
