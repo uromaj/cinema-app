@@ -10,7 +10,7 @@ jobs:
   build:
     docker:
       - image: circleci/node:latest
-    working_directory: ~/repo
+    working_directory: ~/cinema-app
     steps:
       - checkout
       - run:
@@ -31,7 +31,7 @@ jobs:
 deploy-to-aws-s3:
   docker:
     - image: circleci/node:latest
-  working_directory: ~/repo
+  working_directory: ~/cinema-app
   steps:
       - checkout
       - run:
@@ -57,18 +57,18 @@ deploy-to-aws-s3:
           command: |
             if ["${CURRENT_BRANCH}" === "master"]
             then 
-              aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_BUCKET_PROD} --delete
+              aws --region ${AWS_REGION} s3 sync ~/cinema-app/build s3://${AWS_BUCKET_PROD} --delete
             elif  ["${CURRENT_BRANCH}" === "staging"]
             then
-              aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_BUCKET_STAGING} --delete
+              aws --region ${AWS_REGION} s3 sync ~/cinema-app/build s3://${AWS_BUCKET_STAGING} --delete
             else 
-              aws --region ${AWS_REGION} s3 sync ~/repo/build s3://${AWS_BUCKET_DEV} --delete
+              aws --region ${AWS_REGION} s3 sync ~/cinema-app/build s3://${AWS_BUCKET_DEV} --delete
             fi
 
 deploy-to-aws-cloudfront:
   docker:
     - image: circleci/node:latest
-  working_directory: ~/repo
+  working_directory: ~/cinema-app
   steps:
       - checkout
       - run:
@@ -105,8 +105,7 @@ deploy-to-aws-cloudfront:
 workflows:
   build_and_deploy:
     jobs:
-      - build:
-          app-dir: "~/cinema-app/cinema"
+      - build
       - deploy-to-aws-s3:
           requires:
             - build
