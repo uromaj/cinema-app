@@ -10,7 +10,7 @@ jobs:
   build:
     docker:
       - image: circleci/node:latest
-    working_directory: ~/cinema-app
+    working_directory: ~/cinema-app/cinema
     steps:
       - checkout
       - run:
