@@ -28,11 +28,11 @@ jobs:
             - node_modules
           key: app-{{ checksum "package.json" }}
 
-deploy-to-aws-s3:
-  docker:
-    - image: circleci/node:latest
-  working_directory: ~/cinema-app
-  steps:
+  deploy-to-aws-s3:
+    docker:
+      - image: circleci/node:latest
+    working_directory: ~/cinema-app
+    steps:
       - checkout
       - run:
           name: Show current branch
@@ -65,11 +65,11 @@ deploy-to-aws-s3:
               aws --region ${AWS_REGION} s3 sync ~/cinema-app/build s3://${AWS_BUCKET_DEV} --delete
             fi
 
-deploy-to-aws-cloudfront:
-  docker:
-    - image: circleci/node:latest
-  working_directory: ~/cinema-app
-  steps:
+  deploy-to-aws-cloudfront:
+    docker:
+      - image: circleci/node:latest
+    working_directory: ~/cinema-app
+    steps:
       - checkout
       - run:
           name: Show current branch
