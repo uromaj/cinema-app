@@ -57,12 +57,12 @@ jobs:
           command: |
             if ["${CIRCLE_BRANCH}" === "master"]
             then 
-              aws --region ${AWS_REGION} s3 sync ~/cinema-app/cinema/build s3://${AWS_BUCKET_PROD} --delete
+              aws --region ${AWS_REGION} s3 sync ~/cinema-app/build s3://${AWS_BUCKET_PROD} --delete
             elif  ["${CIRCLE_BRANCH}" === "staging"]
             then
-              aws --region ${AWS_REGION} s3 sync ~/cinema-app/cinema/build s3://${AWS_BUCKET_STAGING} --delete
+              aws --region ${AWS_REGION} s3 sync ~/cinema-app/build s3://${AWS_BUCKET_STAGING} --delete
             else 
-              aws --region ${AWS_REGION} s3 sync ~/cinema-app/cinema/build s3://${AWS_BUCKET_DEV} --delete
+              aws --region ${AWS_REGION} s3 sync ~/cinema-app/build s3://${AWS_BUCKET_DEV} --delete
             fi
 
   deploy-to-aws-cloudfront:
