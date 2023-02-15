@@ -15,7 +15,7 @@ jobs:
       - checkout
       - run:
           name: Show current branch
-          command: echo ${CURRENT_BRANCH}
+          command: echo ${CIRCLE_BRANCH}
       - restore_cache:
           keys:
             - app-{{ checksum "package.json" }}
@@ -36,7 +36,7 @@ jobs:
       - checkout
       - run:
           name: Show current branch
-          command: echo ${CURRENT_BRANCH}
+          command: echo ${CIRCLE_BRANCH}
       - run:
           name: installing aws cli
           working_directory: /
@@ -55,10 +55,10 @@ jobs:
       - run: 
           name: Deploy to aws s3
           command: |
-            if ["${CURRENT_BRANCH}" === "master"]
+            if ["${CIRCLE_BRANCH}" === "master"]
             then 
               aws --region ${AWS_REGION} s3 sync ~/cinema-app/cinema/build s3://${AWS_BUCKET_PROD} --delete
-            elif  ["${CURRENT_BRANCH}" === "staging"]
+            elif  ["${CIRCLE_BRANCH}" === "staging"]
             then
               aws --region ${AWS_REGION} s3 sync ~/cinema-app/cinema/build s3://${AWS_BUCKET_STAGING} --delete
             else 
@@ -73,7 +73,7 @@ jobs:
       - checkout
       - run:
           name: Show current branch
-          command: echo ${CURRENT_BRANCH}
+          command: echo ${CIRCLE_BRANCH}
       - run:
           name: installing aws cli
           working_directory: /
@@ -93,10 +93,10 @@ jobs:
           name: Deploy to aws cloudfront
           command: |
             aws configure set preview.cloudfront
-            if ["${CURRENT_BRANCH}" === "master"]
+            if ["${CIRCLE_BRANCH}" === "master"]
             then 
               aws cloudfront create-invalidation --distribution-id ${PROD_DISTRIBUTION_ID} --paths /\* 
-            elif  ["${CURRENT_BRANCH}" === "staging"]
+            elif  ["${CIRCLE_BRANCH}" === "staging"]
             then
               aws cloudfront create-invalidation --distribution-id ${STAGING_DISTRIBUTION_ID} --paths /\*
             else 
