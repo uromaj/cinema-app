@@ -1,11 +1,16 @@
 # This config is equivalent to both the '.circleci/extended/orb-free.yml' and the base '.circleci/config.yml'
+orbs:
+  slack: circleci/slack@4.2.0
 version: 2.1
 executors:
   app-executor:
     docker:
       - image: circleci/node:latest
     working_directory: ~/cinema-app
-
+  slack-executor:
+    docker:
+      - image: 'cibuilds/base:latest'
+    resource_class: small
 aliases:
   - &show-current-branch-name
     run:
