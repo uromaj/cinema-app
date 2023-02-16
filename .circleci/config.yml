@@ -58,9 +58,9 @@ jobs:
       - checkout
       - *show-current-branch-name
       - *restore-cache
-      run:
-        name: linting
-        command: npm run lint
+      - run:
+          name: linting
+          command: npm run lint
 
   deploy-to-aws-s3:
     executor: app-executor
