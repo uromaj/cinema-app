@@ -29,7 +29,9 @@ aliases:
   - &install-dependancies
     run:
       name: Insatll dependancies
-      command: npm install
+      command: |
+        mkdir artifacts
+        npm install
   - &save-cache
     save_cache:
       paths:
@@ -65,9 +67,9 @@ jobs:
           name: Copy Infra folder
           command: cp -r infratructure artifacts/infrastructure
       - persist_to_workspace:
-        root: ./
-        paths:
-          - artifacts
+          root: ./
+          paths:
+            - artifacts
   
   linting:
     executor: app-executor
