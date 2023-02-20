@@ -100,7 +100,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-        at: ./
+          at: ./
       - *show-current-branch-name
       - run:
           name: Terraform Plan
@@ -118,16 +118,16 @@ jobs:
             terraform output rw_cinema_app_s3_bucket_name > ../cinema_bucket_name.txt
             terraform output cloudfront_distribution_id > ../cloudfront_distribution_id.txt
       - presist_to_workspace:
-        root: ./
-        paths:
-          - artifacts
+          root: ./
+          paths:
+            - artifacts
 
   deploy-to-aws-s3:
     executor: app-executor
     steps:
       - checkout
       - attach_workspace:
-        at: ./
+          at: ./
       - *show-current-branch-name
       - *install-aws-cli
       - *build-project
