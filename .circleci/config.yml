@@ -114,14 +114,14 @@ jobs:
       - run:
           name: Terraform Plan
           command: |
-            cd artifacts/infrustructure/
+            cd artifacts/infrastructure/
             terraform init 
             terraform workspace select ${CIRCLE_BRANCH} || terraform workspace new ${CIRCLE_BRANCH}
             terraform plan
       - run:
           name: Terraform Apply
           command: |
-            cd artifacts/infrustructure/
+            cd artifacts/infrastructure/
             terraform workspace select ${CIRCLE_BRANCH}
             terraform apply --auto-approve
             terraform output rw_cinema_app_s3_bucket_name > ../cinema_bucket_name.txt
