@@ -82,7 +82,7 @@ jobs:
           name: Run prettier
           command: npm run prettier:check
 
-  teraform-validate:
+  terraform-validate:
     executor: terraform-executor
     steps:
       - checkout
@@ -95,7 +95,7 @@ jobs:
             terraform validate
             terraform fmt -check
 
-  teraform-plan-and-apply:
+  terraform-plan-and-apply:
     executor: terraform-executor
     steps:
       - checkout
