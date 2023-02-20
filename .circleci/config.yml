@@ -99,7 +99,7 @@ jobs:
       - run:
           name: Terraform Valicate and Format
           command: |
-            cd infrustructure/
+            cd infrastructure/
             terraform init -backend=false
             terraform validate
             terraform fmt -check
