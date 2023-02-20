@@ -1,5 +1,5 @@
 provider "aws" {
-  profile = "rw-cinema"
+  profile = "default"
   region  = "us-east-2"
 }
 
