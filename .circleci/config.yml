@@ -151,7 +151,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-        at: ./
+          at: ./
       - *show-current-branch-name
       - *install-aws-cli
       - *build-project
