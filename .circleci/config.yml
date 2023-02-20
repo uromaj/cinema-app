@@ -117,7 +117,7 @@ jobs:
             terraform apply --auto-approve
             terraform output rw_cinema_app_s3_bucket_name > ../cinema_bucket_name.txt
             terraform output cloudfront_distribution_id > ../cloudfront_distribution_id.txt
-      - presist_to_workspace:
+      - persist_to_workspace:
           root: ./
           paths:
             - artifacts
