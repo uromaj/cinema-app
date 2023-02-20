@@ -144,7 +144,7 @@ jobs:
           name: Deploy to aws s3
           command: |
             AWS_BUCKET_NAME=$(cat artifacts/cinema_bucket_name.txt | sed 's/\"//g')
-            echo AWS_BUCKET_NAME
+            echo $AWS_BUCKET_NAME
             if ["${CIRCLE_BRANCH}" == "master"]
             then 
               aws --region ${AWS_REGION} s3 sync ~/cinema-app/build s3://${AWS_BUCKET_NAME} --delete
@@ -168,7 +168,7 @@ jobs:
           name: Deploy to aws cloudfront
           command: |
             CLOUDFRONT_DISTRIBUTION_ID=$(cat artifacts/cloudfront_distribution_id.txt | sed 's/\"//g')
-            echo CLOUDFRONT_DISTRIBUTION_ID
+            echo $CLOUDFRONT_DISTRIBUTION_ID
             aws configure set preview.cloudfront true
             if ["${CIRCLE_BRANCH}" == "master"]
             then 
