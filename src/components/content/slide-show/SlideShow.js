@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import './SlideShow.scss';
 import PropTypes from 'prop-types';
+import './SlideShow.scss';
 
 const SlideShow = (props) => {
   const { images, auto, showArrows } = props;
@@ -11,7 +11,15 @@ const SlideShow = (props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [sliderInterval, setSliderInterval] = useState(0);
 
+  const { slideShow, slideIndex } = state;
+  let currentSlideIndex = 0;
+
   useEffect(() => {
+    setState({
+      ...state,
+      slideIndex: 0,
+      slideShow: images[0]
+    });
     if (auto) {
       const timeInterval = setInterval(() => {
         autoMoveSlide();
@@ -23,7 +31,7 @@ const SlideShow = (props) => {
         clearInterval(sliderInterval);
       };
     }
-  }, []);
+  }, [images]);
 
   const autoMoveSlide = () => {
     let lastIndex = 0;
@@ -35,9 +43,6 @@ const SlideShow = (props) => {
       slideShow: images[currentSlideIndex]
     }));
   };
-
-  const { slideShow, slideIndex } = state;
-  let currentSlideIndex = 0;
 
   const moveSlideWithArrow = (type) => {
     let index = currentIndex;
@@ -81,11 +86,11 @@ const SlideShow = (props) => {
   const Indicators = (props) => {
     const { currentSlide } = props;
     const listIndicators = images.map((slide, i) => {
-      const butnClasses =
+      const btnClasses =
         i === currentSlide
           ? 'slider-navButton slider-navButton--active'
           : 'slider-navButton';
-      return <button className={butnClasses} key={i} />;
+      return <button className={btnClasses} key={i} />;
     });
     return <div className="slider-nav">{listIndicators}</div>;
   };
@@ -94,12 +99,12 @@ const SlideShow = (props) => {
     <>
       <div className="slider">
         <div className="slider-slides">
-          {images && images.length && slideShow && (
+          {images && images.length && slideShow &&
             <div
               className="slider-image"
               style={{ backgroundImage: `url(${slideShow.url})` }}
             ></div>
-          )}
+          }
         </div>
         <Indicators currentSlide={slideIndex} />
         {showArrows ? <RenderArrows /> : null}
@@ -111,7 +116,7 @@ const SlideShow = (props) => {
 SlideShow.propTypes = {
   images: PropTypes.array.isRequired,
   auto: PropTypes.bool.isRequired,
-  showArrows: PropTypes.number.isRequired,
+  showArrows: PropTypes.bool.isRequired,
   currentSlide: PropTypes.number
 };
 
